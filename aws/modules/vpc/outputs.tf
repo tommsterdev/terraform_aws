@@ -2,8 +2,12 @@ output "vpc_id" {
   value = aws_vpc.this.id
 }
 
-output "public_subnet_ids" {
-  value = aws_subnet.public[*].id
+output "subnet_ids" {
+  value = aws_subnet.subnet[*].id
+}
+
+output "subnet2_ids"{
+    value = aws_subnet.subnet[*].id
 }
 
 output "internet_gateway_id" {
