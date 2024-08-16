@@ -45,13 +45,3 @@ variable "task_execution_role_arn" {
   description = "The ARN of the IAM role for ECS task execution"
   type        = string
 }
-
-variable "security_group_id" {
-  description = "The ID of the security group for ECS tasks"
-  type        = string
-}
-
-variable "log_group_name" {
-  description = "The name of the CloudWatch log group"
-  type        = string
-}
