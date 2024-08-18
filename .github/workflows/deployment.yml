@@ -33,4 +33,8 @@ jobs:
         env:
           TF_VAR_container_image: tommstrdev/portfolio:0.1.8
 
+      - name: Capture Terraform Outputs
+        run: terraform output
+        working-directory: aws/environments/dev
+
       
