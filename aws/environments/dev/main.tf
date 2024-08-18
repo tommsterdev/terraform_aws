@@ -29,6 +29,11 @@ module "iam" {
 
 }
 
+variable "container_image" {
+  description = "The Docker image to use for the container"
+  type        = string
+}
+
 module "ecs" {
   source = "../../modules/ecs"
 
