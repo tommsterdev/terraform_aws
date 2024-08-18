@@ -33,7 +33,7 @@ module "ecs" {
   source = "../../modules/ecs"
 
   vpc_id                  = module.vpc.vpc_id
-  container_image         = "nginx:latest"
+  container_image         = var.container_image
   subnets                 = module.vpc.public_subnet_ids
   target_group_arn        = module.load_balancer.target_group_arn
   app_name                = "dev"
