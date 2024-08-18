@@ -13,10 +13,6 @@ jobs:
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
-     
-    - name: Initialize Terraform
-      run: terraform init
-      working-directory: ./aws/environment/dev
 
     - name: Plan Deployment Destroy
       run: terraform plan -destroy
