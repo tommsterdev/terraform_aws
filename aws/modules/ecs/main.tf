@@ -3,15 +3,15 @@ resource "aws_ecs_cluster" "this" {
 }
 
 resource "aws_ecs_task_definition" "this" {
-  family                   = "${var.app_name}-task"
-  network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
-  container_definitions    = jsonencode([{
+  family       = "${var.app_name}-task"
+  network_mode = "awsvpc"
+  cpu          = "256"
+  memory       = "512"
+  container_definitions = jsonencode([{
     name      = "${var.app_name}-container"
     image     = var.container_image
-    cpu      = 256
-    memory   = 512
+    cpu       = 256
+    memory    = 512
     essential = true
     portMappings = [
       {
@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "this" {
         protocol      = "tcp"
       }
     ]
-}])
+  }])
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = var.task_execution_role_arn
 }

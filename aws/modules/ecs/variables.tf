@@ -45,3 +45,9 @@ variable "task_execution_role_arn" {
   description = "The ARN of the IAM role for ECS task execution"
   type        = string
 }
+
+
+variable "security_group_id" {
+  description = "The security group to associate with the ECS service"
+  type        = string
+}
