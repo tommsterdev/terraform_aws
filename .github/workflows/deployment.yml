@@ -32,6 +32,14 @@ jobs:
         run: terraform init
         working-directory: aws/environments/dev
 
+      - name: Validate Terraform Config
+        run: terraform validate
+        working-directory: aws/environments/dev
+
+      - name: Plan Deployment
+        run: terraform plan
+        working-directory: aws/environments/dev
+
       - name: Apply Terraform
         run: terraform apply -auto-approve
         working-directory: aws/environments/dev
