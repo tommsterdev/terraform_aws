@@ -39,6 +39,10 @@ jobs:
       - name: Plan Deployment
         run: terraform plan
         working-directory: aws/environments/dev
+        env:
+          TF_VAR_container_image: tommstrdev/portfolio:0.1.8
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Apply Terraform
         run: terraform apply -auto-approve
