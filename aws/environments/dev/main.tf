@@ -12,3 +12,31 @@ module "security_groups" {
   name   = "dev"
   vpc_id = module.vpc.vpc_id
 }
+
+module "load_balancer" {
+  source = "../../modules/load_balancer"
+
+  name              = "dev"
+  vpc_id            = module.vpc.vpc_id
+  subnets           = concat(module.vpc.public_subnet_ids, module.vpc.publlic_subnet2_ids)
+  security_group_id = module.security_groups.security_group_id
+  app_name          = "dev"
+
+}
+
+module "iam" {
+  source = "../../modules/iam"
+
+}
+
+module "ecs" {
+  source = "../../modules/ecs"
+
+  vpc_id                  = module.vpc.vpc_id
+  container_image         = "nginx:latest"
+  subnets                 = module.vpc.public_subnet_ids
+  target_group_arn        = module.load_balancer.target_group_arn
+  app_name                = "dev"
+  task_execution_role_arn = module.iam.task_execution_role_arn
+  desired_count           = 1
+}

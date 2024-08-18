@@ -5,11 +5,13 @@ resource "aws_ecs_cluster" "this" {
 resource "aws_ecs_task_definition" "this" {
   family                   = "${var.app_name}-task"
   network_mode             = "awsvpc"
+  cpu                      = "256"
+  memory                   = "512"
   container_definitions    = jsonencode([{
     name      = "${var.app_name}-container"
     image     = var.container_image
-    memory    = var.memory
-    cpu       = var.cpu
+    cpu      = 256
+    memory   = 512
     essential = true
     portMappings = [
       {
@@ -18,7 +20,7 @@ resource "aws_ecs_task_definition" "this" {
         protocol      = "tcp"
       }
     ]
-  }])
+}])
   requires_compatibilities = ["FARGATE"]
   execution_role_arn       = var.task_execution_role_arn
 }
@@ -31,12 +33,11 @@ resource "aws_ecs_service" "this" {
   launch_type     = "FARGATE"
   network_configuration {
     subnets          = var.subnets
-    assign_public_ip  = true
+    assign_public_ip = true
   }
   load_balancer {
     target_group_arn = var.target_group_arn
     container_name   = "${var.app_name}-container"
     container_port   = 80
   }
-  depends_on = [aws_lb_listener.this]
 }
