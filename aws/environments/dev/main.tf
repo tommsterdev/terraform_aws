@@ -48,4 +48,5 @@ module "ecs" {
   app_name                = "dev"
   task_execution_role_arn = module.iam.task_execution_role_arn
   desired_count           = 1
+  security_group_id       = module.security_groups.security_group_id
 }
